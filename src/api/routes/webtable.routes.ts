@@ -1,18 +1,16 @@
 import { Router } from 'express';
-import WebTableController from "../controllers/webtable.controller";
+import { WebTableController } from "../controllers/webtable.controller";
 
-class WebTableRoutes {
+export class WebTableRoutes {
    public router: Router;
-   public WebTablesController: WebTableController = new WebTableController();
+   public webTableController: WebTableController = new WebTableController();
 
    constructor() {
        this.router = Router();
        this.routes();
    }
 
-   routes() {
-       this.router.get('/', this.WebTablesController.getWebTables);
+   routes = () => {
+       this.router.get('/', this.webTableController.getWebTables);
    }
 }
-
-export default WebTableRoutes;

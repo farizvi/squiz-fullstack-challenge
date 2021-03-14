@@ -1,16 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import {ErrorReason} from "./ErrorReason";
 
-export interface ServiceConfig {
-    genericErrorHandler?: (error: string) => void;
-}
-
 abstract class BaseService {
-    private readonly genericErrorHandler?: (error: string) => void;
-
-    protected constructor(config?: ServiceConfig) {
-        this.genericErrorHandler = config.genericErrorHandler;
-    }
 
     async getHeaders(): Promise<AxiosRequestConfig> {
         const config: AxiosRequestConfig = {
@@ -52,9 +43,9 @@ abstract class BaseService {
             response.data.reason = ErrorReason.Failure;
         }
 
-        if (shouldHandleMessaging && this.genericErrorHandler) {
-            this.genericErrorHandler(response.data.messages.join(','));
-        }
+        // if (shouldHandleMessaging && this.genericErrorHandler) {
+        //     this.genericErrorHandler(response.data.messages.join(','));
+        // }
 
         rejectHandler(response.data);
     }

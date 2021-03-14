@@ -1,23 +1,14 @@
 import { WebTableService } from "../../application/services";
-import { WebTableDTO } from "../dtos/WebTableDTO";
 import { Request, Response } from "express";
 
-class WebTableController {
+export class WebTableController {
     public async getWebTables(req: Request, res: Response): Promise<void> {
+        const { query: { currentpage, pagesize } } = req;
         const service = new WebTableService();
-        const webTablesData = await service.getWebTables();
-        let dataToReturn: WebTableDTO[] = [];
+        const webTablesData = await service.getWebTables(parseInt(currentpage as string), parseInt(pagesize as string));
 
-        webTablesData.map(data => (
-            dataToReturn.push({
-                title: data.title,
-                pageTitle: data.pageTitle,
-                url: data.url
-            })
-        ));
-
-        res.json(dataToReturn);
+        res.status(200).json({
+            result: webTablesData
+        });
     }
 }
-
-export default WebTableController;
