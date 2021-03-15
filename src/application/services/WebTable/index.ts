@@ -16,7 +16,7 @@ class WebTableService extends BaseService {
         extraOptions?: AxiosRequestConfig,
         shouldHandleMessaging = true
     ) {
-        const url = 'http://api.mocki.io/v1/04ea008b'; // process.env["WEB_TABLE_GET_URL"];
+        const url = 'https://run.mocky.io/v3/00c23899-a434-4f64-9e3c-bd3f9cbb6b45'; // process.env["WEB_TABLE_GET_URL"];
         const result: WebTable[] = await this.get<WebTable[]>(url, extraOptions, shouldHandleMessaging);
 
         const totalItems = result.length;
